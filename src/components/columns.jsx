@@ -1,0 +1,32 @@
+export const loadHeaders = [
+  { key: "trucker", label: "Trucker" },
+  { key: "status", label: "Status" },
+  { key: "origin_city", label: "Origin City" },
+  { key: "origin_state", label: "Origin State" },
+  { key: "destination_city", label: "Destination City" },
+  { key: "destination_state", label: "Destination State" },
+  { key: "equipment", label: "Equipment" },
+  { key: "ship_date", label: "Ship Date" },
+  { key: "max_weight", label: "Max Weight (lbs)" },
+  { key: "max_length", label: "Max Length (ft)" },
+  { key: "origin_range", label: "Origin Range (mi)" },
+  { key: "destination_range", label: "Destination Range (mi)" },
+  { key: "use_dat", label: "Load Board" },
+  { key: "watch_seconds", label: "Watch (s)" },
+  { key: "start_pst", label: "Start (PST)" },
+  { key: "loads_collected_count", label: "Loads Collected" },
+];
+
+export const loadDetailHeaders = [
+  { key: "id", label: "Load ID" },
+  { key: "origin_city", label: "Origin" },
+  { key: "origin_state", label: "O ST" },
+  { key: "destination_city", label: "Destination" },
+  { key: "destination_state", label: "D ST" },
+  { key: "ship_date", label: "Ship Date" },
+  { key: "distance", label: "Miles" },
+  { key: "payment", label: "Pay ($)" },
+  { key: "rate_per_mile_est", label: "Rate/mi" },
+  { key: "company_name", label: "Broker" },
+  { key: "contact_phone", label: "Phone" },
+];
