@@ -13,7 +13,7 @@ export const loadHeaders = [
   { key: "destination_range", label: "Destination Range (mi)" },
   { key: "use_dat", label: "Load Board" },
   { key: "watch_seconds", label: "Watch (s)" },
-  { key: "start_pst", label: "Start (EST)" },
+  { key: "start_est", label: "Start (EST)" },
   { key: "loads_collected_count", label: "Loads Collected" },
 ];
 
@@ -28,5 +28,6 @@ export const loadDetailHeaders = [
   { key: "payment", label: "Pay ($)" },
   { key: "rate_per_mile_est", label: "Rate/mi" },
   { key: "company_name", label: "Broker" },
+  { key: "start_est", label: "Start (EST)" },
   { key: "contact_phone", label: "Phone" },
 ];

@@ -154,7 +154,7 @@ const Main = () => {
                       );
                     }
 
-                    if (col.key === "start_pst") {
+                    if (col.key === "start_est") {
                       const start = utcIsoToEasternTime(item.created_at);
                       return (
                         <TableCell
@@ -284,6 +284,11 @@ const Main = () => {
                             value = `${load.destination_city ?? "-"}, ${
                               load.destination_state ?? "-"
                             }`;
+                          }
+
+                          if (col.key === "start_est") {
+                            const start = utcIsoToEasternTime(load.created_at);
+                            value = start;
                           }
 
                           return (
