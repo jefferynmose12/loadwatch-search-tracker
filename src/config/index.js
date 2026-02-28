@@ -19,13 +19,7 @@ export const fetchCliSearches = async (
     },
   });
 
-  // console.log(res, {
-  //   page,
-  //   limit: page_size,
-  //   dat,
-  //   status,
-  //   ...(trucker && trucker.trim() ? { trucker: trucker.trim() } : {}),
-  // });
+  //console.log(res)
 
   return res;
 };

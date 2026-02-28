@@ -43,7 +43,7 @@ export const useCliSearches = () => {
           statusFilter,
           truckerFilter || null,
         );
-        console.log(data.data.items)
+        //console.log(data.data.items)
         setItems(data?.data?.items);
         setPagination({
           page: data.data.pagination.page,
