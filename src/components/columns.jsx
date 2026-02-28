@@ -13,7 +13,7 @@ export const loadHeaders = [
   { key: "destination_range", label: "Destination Range (mi)" },
   { key: "use_dat", label: "Load Board" },
   { key: "watch_seconds", label: "Watch (s)" },
-  { key: "start_pst", label: "Start (PST)" },
+  { key: "start_pst", label: "Start (EST)" },
   { key: "loads_collected_count", label: "Loads Collected" },
 ];
 

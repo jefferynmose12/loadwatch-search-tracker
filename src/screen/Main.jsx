@@ -8,7 +8,7 @@ import {
   TableCell,
 } from "../components/ui/Table";
 import { useCliSearches } from "../hook/useCliSearches.js";
-import { getStatusClasses, utcIsoToPacificTime } from "../lib/index.js";
+import { getStatusClasses, utcIsoToEasternTime } from "../lib/index.js";
 
 const Main = () => {
   const {
@@ -155,7 +155,7 @@ const Main = () => {
                     }
 
                     if (col.key === "start_pst") {
-                      const start = utcIsoToPacificTime(item.created_at);
+                      const start = utcIsoToEasternTime(item.created_at);
                       return (
                         <TableCell
                           key={col.key}

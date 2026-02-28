@@ -6,16 +6,26 @@ import { toZonedTime } from "date-fns-tz";
 const PACIFIC_TZ = "America/Los_Angeles";
 
 export function utcIsoToPacificTime(isoString) {
-  const utc = new Date(isoString + 'Z'); // treat as UTC
+  const utc = new Date(isoString + "Z"); // treat as UTC
 
-  return utc.toLocaleTimeString('en-US', {
-    timeZone: 'America/Los_Angeles',
+  return utc.toLocaleTimeString("en-US", {
+    timeZone: "America/Los_Angeles",
     hour12: true,
-    hour: '2-digit',
-    minute: '2-digit',
+    hour: "2-digit",
+    minute: "2-digit",
   });
 }
 
+export function utcIsoToEasternTime(isoString) {
+  const utc = new Date(isoString + "Z");
+
+  return utc.toLocaleTimeString("en-US", {
+    timeZone: "America/New_York",
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 export const toPacificStartTime = (iso) => {
   if (!iso) return "-";
