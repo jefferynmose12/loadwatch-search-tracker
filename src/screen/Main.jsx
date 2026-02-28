@@ -215,7 +215,7 @@ const Main = () => {
 
       {loadsModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600">
-          <div className="w-full max-w-7xl rounded-lg bg-background p-4 shadow-xl">
+          <div className="w-full max-w-8xl rounded-lg bg-background p-4 shadow-xl">
             <div className="mb-3 flex items-center justify-between text-white">
               <div>
                 <h2 className="text-base font-semibold">
@@ -240,7 +240,9 @@ const Main = () => {
                     {loadDetailHeaders.map((col) => (
                       <TableHead
                         key={col.key}
-                        className="p-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground whitespace-nowrap"
+                        className={`p-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground ${
+                          col.key === "description" ? "" : "whitespace-nowrap"
+                        }`}
                       >
                         {col.label}
                       </TableHead>
@@ -286,15 +288,14 @@ const Main = () => {
                             }`;
                           }
 
-                          if (col.key === "start_est") {
-                            const start = utcIsoToEasternTime(load.created_at);
-                            value = start;
-                          }
-
                           return (
                             <TableCell
                               key={col.key}
-                              className="p-2 text-xs whitespace-nowrap"
+                              className={`p-2 text-xs ${
+                                col.key === "description"
+                                  ? "whitespace-normal break-words"
+                                  : "whitespace-nowrap"
+                              }`}
                             >
                               {value === null ||
                               value === undefined ||

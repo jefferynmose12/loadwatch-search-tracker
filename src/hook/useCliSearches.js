@@ -69,7 +69,7 @@ export const useCliSearches = () => {
     setLoadsLoading(true);
     try {
       const data = await fetchLoadsForSearch(searchId);
-      console.log("load", data);
+      //console.log("load", data);
       setLoads(data.data.loads);
       setLoadsCount(data.data.count);
     } finally {

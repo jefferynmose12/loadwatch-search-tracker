@@ -28,6 +28,6 @@ export const loadDetailHeaders = [
   { key: "payment", label: "Pay ($)" },
   { key: "rate_per_mile_est", label: "Rate/mi" },
   { key: "company_name", label: "Broker" },
-  { key: "start_est", label: "Start (EST)" },
   { key: "contact_phone", label: "Phone" },
+  { key: "description", label: "Description" },
 ];
