@@ -19,8 +19,11 @@ export function utcIsoToPacificTime(isoString) {
 export function utcIsoToEasternTime(isoString) {
   const utc = new Date(isoString + "Z");
 
-  return utc.toLocaleTimeString("en-US", {
+  return utc.toLocaleTimeString("en-CA", {
     timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
     hour12: true,
     hour: "2-digit",
     minute: "2-digit",
