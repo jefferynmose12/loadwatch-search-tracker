@@ -8,7 +8,7 @@ import {
   TableCell,
 } from "../components/ui/Table";
 import { useCliSearches } from "../hook/useCliSearches.js";
-import { getStatusClasses, utcIsoToEasternTime } from "../lib/index.js";
+import { getStatusClasses, utcIsoToPacificTime } from "../lib/index.js";
 
 const Main = () => {
   const {
@@ -99,92 +99,114 @@ const Main = () => {
                 </TableCell>
               </TableRow>
             ) : (
-              items.map((item) => (
-                <TableRow
-                  key={item._id}
-                  className="cursor-pointer bg-white hover:bg-gray-50"
-                  onClick={() => openLoads(item.search_id)}
-                >
-                  {loadHeaders.map((col) => {
-                    const value = item[col.key];
+              items.map((item) => {
+                return (
+                  <TableRow
+                    key={item._id}
+                    className="cursor-pointer bg-white hover:bg-gray-50"
+                    onClick={() => openLoads(item.search_id)}
+                  >
+                    {loadHeaders.map((col) => {
+                      const value = item[col.key];
 
-                    if (col.key === "status") {
-                      return (
-                        <TableCell key={col.key} className="p-3">
-                          <span
-                            className={[
-                              "inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize",
-                              getStatusClasses(value),
-                            ].join(" ")}
+                      if (col.key === "status") {
+                        return (
+                          <TableCell key={col.key} className="p-3">
+                            <span
+                              className={[
+                                "inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize",
+                                getStatusClasses(value),
+                              ].join(" ")}
+                            >
+                              {value}
+                            </span>
+                          </TableCell>
+                        );
+                      }
+
+                      if (col.key === "use_dat") {
+                        const isDat = Boolean(value);
+                        return (
+                          <TableCell key={col.key} className="p-3">
+                            <span
+                              className={[
+                                "inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium",
+                                isDat
+                                  ? "bg-sky-100 text-sky-800 border-sky-200"
+                                  : "bg-violet-100 text-violet-800 border-violet-200",
+                              ].join(" ")}
+                            >
+                              {isDat ? "DAT" : "CINESIS"}
+                            </span>
+                          </TableCell>
+                        );
+                      }
+
+                      if (col.key === "watch_seconds") {
+                        const seconds = Number(value) || 0;
+                        const minutes = Math.floor(seconds / 60);
+
+                        return (
+                          <TableCell key={col.key} className="p-3">
+                            <span className="text-sm whitespace-nowrap">
+                              {minutes} min
+                            </span>
+                          </TableCell>
+                        );
+                      }
+
+                      if (col.key === "start_est") {
+                        const start = utcIsoToPacificTime(item.created_at);
+                        return (
+                          <TableCell
+                            key={col.key}
+                            className="p-3 text-sm whitespace-nowrap"
                           >
-                            {value}
-                          </span>
-                        </TableCell>
-                      );
-                    }
+                            {start}
+                          </TableCell>
+                        );
+                      }
 
-                    if (col.key === "use_dat") {
-                      const isDat = Boolean(value);
-                      return (
-                        <TableCell key={col.key} className="p-3">
-                          <span
-                            className={[
-                              "inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium",
-                              isDat
-                                ? "bg-sky-100 text-sky-800 border-sky-200"
-                                : "bg-violet-100 text-violet-800 border-violet-200",
-                            ].join(" ")}
+                      if (col.key === "estimated_end_time") {
+                        const seconds = Number(item.watch_seconds) || 0;
+                        const minutes = Math.floor(seconds / 60);
+
+                        const startUtcDate = new Date(item.created_at);
+                        const endUtcDate = new Date(
+                          startUtcDate.getTime() + minutes * 60 * 1000,
+                        );
+
+                        const endPst = utcIsoToPacificTime(endUtcDate);
+                        return (
+                          <TableCell
+                            key={col.key}
+                            className="p-3 text-sm whitespace-nowrap"
                           >
-                            {isDat ? "DAT" : "CINESIS"}
-                          </span>
-                        </TableCell>
-                      );
-                    }
+                            {endPst}
+                          </TableCell>
+                        );
+                      }
 
-                    if (col.key === "watch_seconds") {
-                      const seconds = Number(value) || 0;
-                      const minutes = Math.floor(seconds / 60);
-
-                      return (
-                        <TableCell key={col.key} className="p-3">
-                          <span className="text-sm whitespace-nowrap">
-                            {minutes} min
-                          </span>
-                        </TableCell>
-                      );
-                    }
-
-                    if (col.key === "start_est") {
-                      const start = utcIsoToEasternTime(item.created_at);
                       return (
                         <TableCell
                           key={col.key}
                           className="p-3 text-sm whitespace-nowrap"
                         >
-                          {start}
+                          {Array.isArray(value)
+                            ? value.length > 0
+                              ? value.join(", ")
+                              : "-"
+                            : value === null ||
+                                value === undefined ||
+                                value === ""
+                              ? "-"
+                              : String(value)}
                         </TableCell>
                       );
-                    }
-
-                    return (
-                      <TableCell
-                        key={col.key}
-                        className="p-3 text-sm whitespace-nowrap"
-                      >
-                        {Array.isArray(value)
-                          ? value.length > 0
-                            ? value.join(", ")
-                            : "-"
-                          : value === null ||
-                              value === undefined ||
-                              value === ""
-                            ? "-"
-                            : String(value)}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))
+                    })}
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>
